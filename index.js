@@ -36,7 +36,8 @@ var id = setInterval(function() {
       // only push when there is new data 
       if(obj.now.arid != old_arid){
         // send arid to all clients
-        io.emit('play', JSON.stringify(obj.now.recording.title + ' - ' + obj.now.recording.artists[0].name));
+        io.emit('play', JSON.stringify(obj.now, undefined, 2));
+        // io.emit('play', JSON.stringify(obj.now.recording.title + ' - ' + obj.now.recording.artists[0].name));
         old_arid = obj.now.arid;
       }
     })

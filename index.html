@@ -5,12 +5,7 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+      hr {background-color:#000000;border-width:0;color:#000000;height:2px;line-height:0;width:70%;}
     </style>
   </head>
   <body>
@@ -20,7 +15,9 @@
     <script>
       var socket = io();
       socket.on('play', function(msg){
-        $('#plays').append($('<li>').text(msg));
+        $('#plays').append($('<h1>New play</h1>'));
+        $('#plays').append($('<pre>').text(msg));
+        $('#plays').append($('<hr>'));
       });
     </script>
   </body>
