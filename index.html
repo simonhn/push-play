@@ -15,7 +15,8 @@
     <script>
       var socket = io();
       socket.on('play', function(msg){
-        $('#plays').append($('<h1>New play</h1>'));
+        var d = new Date();
+        $('#plays').append($('<h1>').text('New play recieved at '+d.toUTCString()));
         $('#plays').append($('<pre>').text(msg));
         $('#plays').append($('<hr>'));
       });

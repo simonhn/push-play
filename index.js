@@ -35,6 +35,9 @@ var id = setInterval(function() {
       var obj = JSON.parse(data);      
       // only push when there is new data 
       if(obj.now.arid != old_arid){
+        var d = new Date();
+        console.log("New play detected at "+d.toUTCString());
+        
         // send arid to all clients
         io.emit('play', JSON.stringify(obj.now, undefined, 2));
         // io.emit('play', JSON.stringify(obj.now.recording.title + ' - ' + obj.now.recording.artists[0].name));
@@ -44,7 +47,7 @@ var id = setInterval(function() {
   }).on('error', function(e) {
     console.log("Got error: " + e.message);
   })
-}, 10000);
+}, 5000);
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
