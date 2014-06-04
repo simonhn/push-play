@@ -12,10 +12,6 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
-  socket.on('play', function(msg){
-    console.log('message: ' + msg);
-    io.emit('play', msg);
-  });
 });
 
 var options = {
@@ -25,6 +21,8 @@ var options = {
 };
 
 var old_arid;
+
+// the method that polls the music api every 10 seconds
 var id = setInterval(function() {
   http_client.get(options, function(res) {
     var data = '';
@@ -36,6 +34,8 @@ var id = setInterval(function() {
     res.on('end',function(){
       var obj = JSON.parse(data);
       console.log( obj.now.arid);
+      
+      // only push when there is new data 
       if(obj.now.arid != old_arid){
         // send arid to all clients
         io.emit('play', JSON.stringify(obj.now.arid));
