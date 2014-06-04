@@ -3,7 +3,7 @@
 prototype app for pushing play data to clients (browsers)
 
 ## Server
-Polls the music api for new playout data every 10 seconds, when there is a new 'now' arid it pushes this data to the connected clients.
+Polls the music api for new playout data for double j every 10 seconds, when there is a new 'now' arid it pushes this data to the connected clients.
 
 ## Client
 Creates a websocket connection to the server and prints the play arid to the screen
@@ -12,7 +12,7 @@ Creates a websocket connection to the server and prints the play arid to the scr
 npm install
 
 ## Run
-npm index.js
+node index.js
 
 open a few browser windows at localhost:3000 and wait for the play arids to be printed
 

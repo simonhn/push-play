@@ -32,13 +32,11 @@ var id = setInterval(function() {
     });
 
     res.on('end',function(){
-      var obj = JSON.parse(data);
-      console.log( obj.now.arid);
-      
+      var obj = JSON.parse(data);      
       // only push when there is new data 
       if(obj.now.arid != old_arid){
         // send arid to all clients
-        io.emit('play', JSON.stringify(obj.now.arid));
+        io.emit('play', JSON.stringify(obj.now.recording.title + ' - ' + obj.now.recording.artists[0].name));
         old_arid = obj.now.arid;
       }
     })
