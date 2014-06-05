@@ -3,10 +3,10 @@
 prototype app for pushing play data to clients (browsers)
 
 ## Server
-Polls the music api for new playout data for double j every 10 seconds, when there is a new 'now' arid it pushes this data to the connected clients.
+Polls the music api for new playout data for double j every 5 seconds, when there is a new 'now' arid it pushes this data to the connected clients.
 
 ## Client
-Creates a websocket connection to the server and prints the play arid to the screen
+Creates a websocket connection to the server and prints the now playing json object to the screen
 
 ## Install
 npm install

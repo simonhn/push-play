@@ -22,7 +22,7 @@ var options = {
 
 var old_arid;
 
-// the method that polls the music api every 10 seconds
+// the method that polls the music api every 5 seconds
 var id = setInterval(function() {
   http_client.get(options, function(res) {
     var data = '';
@@ -33,14 +33,13 @@ var id = setInterval(function() {
 
     res.on('end',function(){
       var obj = JSON.parse(data);      
+      
       // only push when there is new data 
       if(obj.now.arid != old_arid){
+        // send now object to all clients
+        io.emit('play', JSON.stringify(obj.now, undefined, 2));
         var d = new Date();
         console.log("New play detected at "+d.toUTCString());
-        
-        // send arid to all clients
-        io.emit('play', JSON.stringify(obj.now, undefined, 2));
-        // io.emit('play', JSON.stringify(obj.now.recording.title + ' - ' + obj.now.recording.artists[0].name));
         old_arid = obj.now.arid;
       }
     })
