@@ -2,6 +2,7 @@ var app = require('express')();
 var http_client = require('http');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var moment = require('moment');
 
 app.get('/', function(req, res){
   res.sendfile('index.html');
@@ -38,8 +39,12 @@ var id = setInterval(function() {
       if(obj.now.arid != old_arid){
         // send now object to all clients
         io.emit('play', JSON.stringify(obj.now, undefined, 2));
-        var d = new Date();
-        console.log("New play detected at "+d.toUTCString());
+        var now = moment.utc();
+        var play_date = moment(obj.now.played_time);
+        console.log("Played time is         "+play_date.format());
+        console.log("New play detected at   "+now.format());
+        console.log("update delay:          " + now.diff(play_date, 'seconds') + " seconds");
+        console.log('');
         old_arid = obj.now.arid;
       }
     })
